@@ -41,6 +41,7 @@ body {
 
 .section-title {
     font-size: clamp(24px, 4vw, 32px);
+    line-height: 1.25;
     margin-bottom: 30px;
     color: var(--text);
     font-weight: 700;
@@ -54,13 +55,29 @@ input:focus-visible {
     outline-offset: 2px;
 }
 
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+:target {
+    scroll-margin-top: 80px;
+}
+
 /* ==================== ШАПКА ==================== */
 .header {
     background: var(--bg-block);
     padding: 20px 0;
     border-bottom: 1px solid var(--border);
     box-shadow: var(--shadow);
-    position: static;
+    position: sticky;
     top: 0;
     z-index: 100;
 }
@@ -121,32 +138,47 @@ input:focus-visible {
     font-weight: 700;
 }
 
-/* ==================== INTRO ==================== */
+/* ==================== INTRO (главная) ==================== */
 .intro {
-    padding: 80px 0;
+    padding: 40px 0;
 }
 
 .intro .container {
-    display: flex;
-    align-items: center;
-    gap: 50px;
+    display: block;
 }
 
 .intro-text {
-    flex: 1;
+    max-width: 700px;
+    margin: 0 auto;
+    text-align: center;
 }
 
-.intro-title {
-    font-size: clamp(26px, 5vw, 42px);
-    margin-bottom: 20px;
-    color: var(--text);
+.intro-title,
+.page-intro h1 {
+    font-size: clamp(28px, 5vw, 42px);
     line-height: 1.2;
+    margin-bottom: 15px;
+    color: var(--text);
+    font-weight: 700;
 }
 
-.intro-desc {
+.intro-desc,
+.page-intro p {
     font-size: 18px;
-    margin-bottom: 30px;
+    line-height: 1.6;
     color: var(--text-muted);
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 30px;
+}
+
+.intro-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
 }
 
 .btn {
@@ -157,8 +189,10 @@ input:focus-visible {
     text-decoration: none;
     border-radius: 10px;
     font-weight: 600;
-    transition: all 0.3s;
+    border: 2px solid var(--accent);
+    transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s, border-color 0.3s;
     box-shadow: var(--shadow);
+    cursor: pointer;
 }
 
 .btn:visited {
@@ -167,389 +201,56 @@ input:focus-visible {
 
 .btn:hover {
     background: var(--accent-hover);
+    border-color: var(--accent-hover);
     transform: translateY(-2px);
     box-shadow: var(--shadow-hover);
 }
 
 .btn:active {
     background: var(--accent-active);
+    border-color: var(--accent-active);
     transform: translateY(0);
-}
-
-.slider {
-    flex: 1;
-    position: relative;
-}
-
-.slider img {
-    width: 100%;
-    height: auto;
-    border-radius: var(--radius);
-    display: block;
-    box-shadow: var(--shadow);
-}
-
-/* ==================== SERVICES ==================== */
-.services {
-    padding: 80px 0;
-}
-
-.services-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 20px;
-}
-
-.service-card {
-    background: var(--bg-block);
-    padding: 35px 25px;
-    border-radius: var(--radius);
-    text-align: center;
-    border: 1px solid var(--border);
-}
-
-.service-icon {
-    font-size: 48px;
-    margin-bottom: 15px;
-}
-
-.service-card h3 {
-    font-size: 22px;
-    margin-bottom: 10px;
-    color: var(--text);
-}
-
-.service-card p {
-    color: var(--text-muted);
-    font-size: 15px;
-}
-
-/* ==================== RECENT ==================== */
-.recent {
-    padding: 80px 0;
-}
-
-.recent-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 20px;
-}
-
-.recent-card {
-    background: var(--bg-block);
-    border-radius: var(--radius);
-    border: 1px solid var(--border);
-    transition: all 0.3s;
-    overflow: hidden;
-}
-
-.recent-card:hover {
-    transform: translateY(-5px);
-    box-shadow: var(--shadow-hover);
-}
-
-.recent-link {
-    display: block;
-    padding: 20px;
-    text-decoration: none;
-    color: inherit;
-    transition: color 0.3s;
-}
-
-.recent-link:visited {
-    color: inherit;
-}
-
-.recent-link:hover {
-    color: var(--accent);
-}
-
-.recent-link:active {
-    color: var(--accent-active);
-}
-
-.recent-card img {
-    width: 100%;
-    height: 200px;
-    object-fit: cover;
-    border-radius: 10px;
-    margin-bottom: 15px;
-    background: var(--border);
-}
-
-.recent-card h3 {
-    font-size: 18px;
-    margin-bottom: 10px;
-    color: inherit;
-}
-
-.recent-card p {
-    color: var(--text-muted);
-    font-size: 14px;
-}
-
-/* ==================== GENRES ==================== */
-.genres {
-    padding: 80px 0;
-}
-
-.genres-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-bottom: 30px;
-    background: var(--bg-block);
-    border-radius: var(--radius);
-    overflow: hidden;
-    box-shadow: var(--shadow);
-}
-
-.genres-table caption {
-    caption-side: top;
-    text-align: left;
-    padding: 0 0 15px;
-    font-size: 15px;
-    color: var(--text-muted);
-}
-
-.genres-table th {
-    background: #2c3e50;
-    color: #ffffff;
-    padding: 18px 15px;
-    text-align: left;
-    font-weight: 600;
-    font-size: 15px;
-}
-
-.genres-table td {
-    padding: 14px 15px;
-    color: var(--text);
-    font-size: 15px;
-    border-bottom: 1px solid var(--border);
-}
-
-.genres-table tr:last-child td {
-    border-bottom: none;
-}
-
-.genre-top {
-    background: #d5f4e6;
-}
-
-.genre-popular {
-    background: #fef9e7;
-}
-
-.genre-average {
-    background: #fdebd0;
-}
-
-.genre-rare {
-    background: #ebedef;
-}
-
-.genres-legend {
-    background: var(--bg-block);
-    padding: 25px;
-    border-radius: var(--radius);
-    border: 1px solid var(--border);
-}
-
-.genres-legend h3 {
-    font-size: 18px;
-    margin-bottom: 15px;
-    color: var(--text);
-}
-
-.genres-legend ul {
-    list-style: none;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-}
-
-.genres-legend li {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    color: var(--text);
-    font-size: 15px;
-}
-
-.legend-color {
-    width: 16px;
-    height: 16px;
-    border-radius: 4px;
-    display: inline-block;
-}
-
-.legend-top {
-    background: #2ecc71;
-}
-
-.legend-popular {
-    background: #f1c40f;
-}
-
-.legend-average {
-    background: #e67e22;
-}
-
-.legend-rare {
-    background: #95a5a6;
-}
-
-/* ==================== CONTACTS ==================== */
-.contacts {
-    padding: 80px 0;
-}
-
-.contacts-list {
-    list-style: none;
-    margin-bottom: 40px;
-}
-
-.contacts-list li {
-    font-size: 16px;
-    color: var(--text);
-    padding: 12px 0;
-    border-bottom: 1px solid var(--border);
-}
-
-.contacts-list li:last-child {
-    border-bottom: none;
-}
-
-.contacts-list a {
-    color: var(--accent);
-    text-decoration: none;
-    transition: color 0.3s;
-}
-
-.contacts-list a:visited {
-    color: var(--accent-visited);
-}
-
-.contacts-list a:hover {
-    color: var(--accent-hover);
-    text-decoration: underline;
-}
-
-.contacts-list a:active {
-    color: var(--accent-active);
-}
-
-.map {
-    margin-bottom: 40px;
-    border-radius: var(--radius);
-    overflow: hidden;
-    box-shadow: var(--shadow);
-}
-
-.map-inner {
-    position: relative;
-    overflow: hidden;
-}
-
-.map-inner iframe {
-    width: 100%;
-    height: 600px;
-    border: none;
-    display: block;
-}
-
-.map-link {
-    color: #eee;
-    font-size: 12px;
-    position: absolute;
-    left: 0;
-    text-decoration: none;
-}
-
-.map-link:first-of-type {
-    top: 0;
-}
-
-.map-link:last-of-type {
-    top: 14px;
-}
-
-.map-link:visited {
-    color: #eee;
-}
-
-.social-list {
-    list-style: none;
-}
-
-.social-list li {
-    margin-bottom: 12px;
-}
-
-.social-list a {
-    color: var(--accent);
-    text-decoration: none;
-    font-size: 16px;
-    transition: color 0.3s;
-}
-
-.social-list a:visited {
-    color: var(--accent-visited);
-}
-
-.social-list a:hover {
-    color: var(--accent-hover);
-    text-decoration: underline;
-}
-
-.social-list a:active {
-    color: var(--accent-active);
-}
-
-/* ==================== FOOTER ==================== */
-.footer {
-    background: #2c3e50;
-    color: #ffffff;
-    padding: 40px 0;
-    margin-top: 80px;
-}
-
-.footer-nav {
-    display: flex;
-    justify-content: center;
-    gap: 25px;
-    margin-bottom: 20px;
-    flex-wrap: wrap;
-}
-
-.footer-nav a {
-    color: #ffffff;
-    text-decoration: none;
-    font-size: 15px;
-    transition: color 0.3s;
-}
-
-.footer-nav a:visited {
-    color: #ffffff;
-}
-
-.footer-nav a:hover {
-    color: var(--accent);
-}
-
-.footer-nav a:active {
-    color: var(--accent-active);
-}
-
-.footer p {
-    text-align: center;
-    color: #ffffff;
-    font-size: 14px;
-    opacity: 0.7;
 }
 
 /* ==================== КАТАЛОГ ==================== */
 .catalog {
-    padding: 80px 0;
+    padding: 40px 0;
+}
+
+.catalog-filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 30px;
+}
+
+.filter-btn {
+    background: var(--bg-block);
+    color: var(--text);
+    border: 1px solid var(--border);
+    padding: 10px 20px;
+    border-radius: 30px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+    font-family: inherit;
+}
+
+.filter-btn:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+}
+
+.filter-btn.active {
+    background: var(--accent);
+    color: #ffffff;
+    border-color: var(--accent);
+}
+
+.filter-btn:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
 }
 
 .catalog-grid {
@@ -568,12 +269,16 @@ input:focus-visible {
     gap: 25px;
     align-items: center;
     border: 1px solid var(--border);
-    transition: all 0.3s;
+    transition: transform 0.3s, box-shadow 0.3s;
 }
 
 .catalog-card:hover {
     transform: translateY(-5px);
     box-shadow: var(--shadow-hover);
+}
+
+.catalog-card.is-hidden {
+    display: none;
 }
 
 .catalog-image {
@@ -583,6 +288,11 @@ input:focus-visible {
     border-radius: 12px;
     flex-shrink: 0;
     background: var(--border);
+}
+
+.catalog-info {
+    min-width: 0;
+    flex: 1;
 }
 
 .catalog-card h3 {
@@ -632,27 +342,182 @@ input:focus-visible {
     line-height: 1.6;
 }
 
-/* ==================== СТРАНИЦА "О САЙТЕ" ==================== */
-.page-intro {
-    padding: 80px 0 40px;
+/* ==================== ЖАНРЫ (плитки) ==================== */
+.genres {
+    padding: 40px 0;
+}
+
+.genres-tiles {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+}
+
+.genre-tile {
+    background: var(--bg-block);
+    padding: 25px 20px;
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
     text-align: center;
 }
 
-.page-intro h1 {
-    font-size: clamp(28px, 5vw, 42px);
-    margin-bottom: 15px;
+.genre-tile h3 {
+    font-size: 18px;
+    margin-bottom: 5px;
     color: var(--text);
 }
 
-.page-intro p {
-    font-size: 18px;
+.genre-tile p {
+    font-size: 14px;
     color: var(--text-muted);
-    max-width: 600px;
+}
+
+/* ==================== RECENT ==================== */
+.recent {
+    padding: 40px 0;
+}
+
+.recent-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.recent-card {
+    background: var(--bg-block);
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+    transition: transform 0.3s, box-shadow 0.3s;
+    overflow: hidden;
+}
+
+.recent-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-hover);
+}
+
+.recent-link {
+    display: block;
+    padding: 20px;
+    text-decoration: none;
+    color: inherit;
+    transition: color 0.3s;
+}
+
+.recent-link:visited {
+    color: inherit;
+}
+
+.recent-link:hover {
+    color: var(--accent);
+}
+
+.recent-link:active {
+    color: var(--accent-active);
+}
+
+.recent-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-bottom: 15px;
+    background: var(--border);
+}
+
+.recent-card h3 {
+    font-size: 18px;
+    margin-bottom: 10px;
+    color: inherit;
+}
+
+.recent-card p {
+    color: var(--text-muted);
+    font-size: 14px;
+}
+
+/* ==================== КОНТАКТЫ ==================== */
+.contacts {
+    padding: 40px 0;
+}
+
+.contacts-list {
+    list-style: none;
+    margin-bottom: 40px;
+}
+
+.contacts-list li {
+    font-size: 16px;
+    color: var(--text);
+    padding: 12px 0;
+    border-bottom: 1px solid var(--border);
+}
+
+.contacts-list li:last-child {
+    border-bottom: none;
+}
+
+.contacts-list a {
+    color: var(--accent);
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.contacts-list a:visited {
+    color: var(--accent-visited);
+}
+
+.contacts-list a:hover {
+    color: var(--accent-hover);
+    text-decoration: underline;
+}
+
+.contacts-list a:active {
+    color: var(--accent-active);
+}
+
+.social-list {
+    list-style: none;
+}
+
+.social-list li {
+    margin-bottom: 12px;
+}
+
+.social-list a {
+    color: var(--accent);
+    text-decoration: none;
+    font-size: 16px;
+    transition: color 0.3s;
+}
+
+.social-list a:visited {
+    color: var(--accent-visited);
+}
+
+.social-list a:hover {
+    color: var(--accent-hover);
+    text-decoration: underline;
+}
+
+.social-list a:active {
+    color: var(--accent-active);
+}
+
+/* ==================== СТРАНИЦА "О САЙТЕ" ==================== */
+.page-intro {
+    padding: 40px 0;
+    text-align: center;
+}
+
+.page-intro .container {
+    width: min(700px, 90%);
     margin: 0 auto;
 }
 
 .stats {
-    padding: 60px 0;
+    padding: 40px 0;
 }
 
 .stats-grid {
@@ -682,16 +547,21 @@ input:focus-visible {
     font-size: 15px;
 }
 
+/* ==================== НАША МИССИЯ ==================== */
 .mission {
-    padding: 60px 0;
-    
+    padding: 40px 0;
+}
+
+.mission .container {
+    width: min(700px, 90%);
+    margin: 0 auto;
 }
 
 .mission p {
     font-size: 18px;
+    line-height: 1.6;
     color: var(--text);
-    max-width: 700px;
-    line-height: 1.7;
+    max-width: 600px;
     margin-bottom: 15px;
 }
 
@@ -718,19 +588,52 @@ input:focus-visible {
     color: var(--accent-active);
 }
 
-/* ==================== АДАПТИВНОСТЬ ==================== */
-
-/* Планшет (до 900px) */
-@media (max-width: 900px) {
-    .intro .container {
-        flex-direction: column;
-        gap: 30px;
-    }
+/* ==================== ПОДВАЛ ==================== */
+.footer {
+    background: #2c3e50;
+    color: #ffffff;
+    padding: 40px 0;
+    margin-top: 40px;
 }
+
+.footer-nav {
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+.footer-nav a {
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 15px;
+    transition: color 0.3s;
+}
+
+.footer-nav a:visited {
+    color: #ffffff;
+}
+
+.footer-nav a:hover {
+    color: var(--accent);
+}
+
+.footer-nav a:active {
+    color: var(--accent-active);
+}
+
+.footer p {
+    text-align: center;
+    color: #ffffff;
+    font-size: 14px;
+    opacity: 0.7;
+}
+
+/* ==================== АДАПТИВНОСТЬ ==================== */
 
 /* Телефон (до 500px) */
 @media (max-width: 500px) {
-    /* Общее — минимальные отступы */
     .container {
         width: 100%;
         padding: 0 6px;
@@ -741,20 +644,15 @@ input:focus-visible {
         margin-bottom: 15px;
     }
 
-    /* Секции — компактнее */
     .intro,
-    .services,
-    .recent,
     .catalog,
     .genres,
+    .recent,
     .contacts,
     .stats,
-    .mission {
-        padding: 15px 0;
-    }
-
+    .mission,
     .page-intro {
-        padding: 25px 0 12px;
+        padding: 15px 0;
     }
 
     /* Шапка */
@@ -786,18 +684,20 @@ input:focus-visible {
     }
 
     /* Intro */
-    .intro .container {
-        gap: 15px;
-    }
-
-    .intro-title {
+    .intro-title,
+    .page-intro h1 {
         font-size: 20px;
         margin-bottom: 8px;
     }
 
-    .intro-desc {
+    .intro-desc,
+    .page-intro p {
         font-size: 13px;
         margin-bottom: 15px;
+    }
+
+    .intro-actions {
+        gap: 8px;
     }
 
     .btn {
@@ -805,51 +705,80 @@ input:focus-visible {
         font-size: 13px;
     }
 
-    /* Картинка в intro — по центру, меньше */
-    .slider {
-        max-width: 250px;
-        margin: 15px auto 0;
+    /* Фильтр — перенос на новую строку */
+    .catalog-filters {
+        flex-wrap: wrap;
+        gap: 6px;
+        margin-bottom: 15px;
     }
 
-    .slider img {
-        height: auto;
+    .filter-btn {
+        padding: 6px 12px;
+        font-size: 11px;
     }
 
-    /* Сетки — 1 колонка */
-    .services-grid,
+    /* Каталог */
+    .catalog-grid {
+        max-width: 100%;
+        margin: 0;
+        gap: 8px;
+    }
+
+    .catalog-card {
+        padding: 6px;
+        gap: 8px;
+    }
+
+    .catalog-image {
+        width: 70px;
+        height: 70px;
+        border-radius: 6px;
+    }
+
+    .catalog-card h3 {
+        font-size: 13px;
+        margin-bottom: 2px;
+    }
+
+    .catalog-album {
+        font-size: 10px;
+        margin-bottom: 2px;
+    }
+
+    .catalog-genre {
+        font-size: 9px;
+        margin-bottom: 2px;
+    }
+
+    .catalog-desc {
+        font-size: 10px;
+        line-height: 1.3;
+    }
+
+    /* Жанры — плитки в 2 колонки */
+    .genres-tiles {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 8px;
+    }
+
+    .genre-tile {
+        padding: 12px 8px;
+    }
+
+    .genre-tile h3 {
+        font-size: 13px;
+    }
+
+    .genre-tile p {
+        font-size: 10px;
+    }
+
+    /* Недавно добавлено */
     .recent-grid {
         grid-template-columns: 1fr;
         gap: 8px;
     }
 
-    /* Услуги — как в каталоге */
-    .service-card {
-        display: flex;
-        flex-direction: row;
-        text-align: left;
-        padding: 6px;
-        gap: 8px;
-        align-items: center;
-    }
-
-    .service-icon {
-        font-size: 28px;
-        margin-bottom: 0;
-        flex-shrink: 0;
-        width: 40px;
-        text-align: center;
-    }
-
-    .service-card h3 {
-        font-size: 13px;
-        margin-bottom: 2px;
-    }
-
-    .service-card p {
-        font-size: 10px;
-    }
-
-    /* Недавно добавлено — как в каталоге */
     .recent-link {
         display: flex;
         flex-direction: row;
@@ -876,50 +805,6 @@ input:focus-visible {
         font-size: 10px;
     }
 
-    /* Каталог */
-    .catalog-grid {
-        max-width: 100%;
-        margin: 0;
-        gap: 8px;
-    }
-
-    .catalog-card {
-        flex-direction: row;
-        text-align: left;
-        padding: 6px;
-        gap: 8px;
-        align-items: center;
-        width: 100%;
-        box-sizing: border-box;
-    }
-
-    .catalog-image {
-        width: 70px;
-        height: 70px;
-        flex-shrink: 0;
-        border-radius: 6px;
-    }
-
-    .catalog-card h3 {
-        font-size: 13px;
-        margin-bottom: 2px;
-    }
-
-    .catalog-album {
-        font-size: 10px;
-        margin-bottom: 2px;
-    }
-
-    .catalog-genre {
-        font-size: 9px;
-        margin-bottom: 2px;
-    }
-
-    .catalog-desc {
-        font-size: 10px;
-        line-height: 1.3;
-    }
-
     /* Статистика */
     .stats-grid {
         gap: 8px;
@@ -938,55 +823,19 @@ input:focus-visible {
         font-size: 11px;
     }
 
-    /* Таблица жанров — скролл только таблицы */
-    .table-wrap {
-        overflow-x: auto;
-        margin-bottom: 12px;
-        -webkit-overflow-scrolling: touch;
+    /* Миссия */
+    .mission .container {
+        width: 100%;
     }
 
-    .genres-table {
-        min-width: 480px;
-    }
-
-    .genres-table th,
-    .genres-table td {
-        padding: 5px 4px;
-        font-size: 11px;
-    }
-
-    .genres-table caption {
-        font-size: 11px;
-        padding: 0 0 8px;
-    }
-
-    /* Легенда */
-    .genres-legend {
-        padding: 12px;
-    }
-
-    .genres-legend h3 {
-        font-size: 14px;
-        margin-bottom: 8px;
-    }
-
-    .genres-legend ul {
-        flex-direction: column;
-        gap: 6px;
-    }
-
-    .genres-legend li {
-        font-size: 11px;
+    .mission p {
+        font-size: 13px;
     }
 
     /* Контакты */
     .contacts-list li {
         font-size: 13px;
         padding: 6px 0;
-    }
-
-    .map-inner iframe {
-        height: 220px;
     }
 
     /* Подвал */

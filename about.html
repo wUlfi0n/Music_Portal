@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="description" content="О Music_Portal — сообщество меломанов, каталог музыки, жанры и плейлисты.">
+        <meta name="description" content="О Music_Portal — сообщество меломанов, каталог музыки, жанры и плейлисты. Контакты.">
 
         <title>О сайте — Music_Portal</title>
 
@@ -20,61 +20,75 @@
                     <span>Music_Portal</span>
                 </a>
 
-                <nav class="nav">
+                <nav class="nav" aria-label="Основная навигация">
                     <ul class="nav-list">
-                        <li><a href="index.html">Главная страница</a></li>
-                        <li><a href="about.html" class="active">О сайте</a></li>
-                        <li><a href="catalog.html">Каталог</a></li>
-                        <li><a href="genres.html">Жанры</a></li>
-                        <li><a href="contacts.html">Контакты</a></li>
+                        <li><a href="index.html">Главная</a></li>
+                        <li><a href="about.html" class="active" aria-current="page">О сайте</a></li>
                     </ul>
                 </nav>
             </div>
         </header>
 
-        <section class="page-intro">
-            <div class="container">
-                <h1>О сайте</h1>
-                <p>Music_Portal — это сообщество меломанов, которые делятся музыкой, обсуждают новинки и открывают новых исполнителей.</p>
-            </div>
-        </section>
+        <main>
 
-        <section class="stats">
-            <div class="container">
-                <h2 class="section-title">На сайте добавлено</h2>
-                <div class="stats-grid">
-                    <div class="stat-card">
-                        <div class="stat-number">20+</div>
-                        <p>треков в каталоге</p>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-number">10+</div>
-                        <p>исполнителей</p>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-number">5+</div>
-                        <p>жанров</p>
+            <section class="page-intro">
+                <div class="container">
+                    <h1>О сайте</h1>
+                    <p>Music_Portal — это сообщество меломанов, которые делятся музыкой, обсуждают новинки и открывают новых исполнителей.</p>
+                </div>
+            </section>
+
+            <section class="stats">
+                <div class="container">
+                    <h2 class="section-title">На сайте добавлено</h2>
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-number">20+</div>
+                            <p>треков в каталоге</p>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">10+</div>
+                            <p>исполнителей</p>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">5+</div>
+                            <p>жанров</p>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </section>
+            </section>
 
-        <section class="mission">
-            <div class="container">
-                <h2 class="section-title">Наша миссия</h2>
-                <p>Мы верим, что музыка объединяет людей. Наша цель — сделать её доступной каждому: без границ, без ограничений, без рекламы.</p>
-                <p>Хочешь связаться? <a href="contacts.html">Перейти к контактам</a>.</p>
-            </div>
-        </section>
+            <section class="mission">
+                <div class="container">
+                    <h2 class="section-title">Наша миссия</h2>
+                    <p>Мы верим, что музыка объединяет людей. Наша цель — сделать её доступной каждому: без границ, без ограничений, без рекламы.</p>
+                </div>
+            </section>
+
+            <section class="contacts">
+                <div class="container">
+                    <h2 class="section-title">Контакты</h2>
+
+                    <ul class="contacts-list">
+                        <li>📧 Email: <a href="mailto:info@music-portal.ru">info@music-portal.ru</a></li>
+                        <li>📞 Телефон: <a href="tel:+79991234567">+7 (999) 123-45-67</a></li>
+                        <li>📍 Адрес: Городской округ Брянск, Бежицкий район, бульвар 50 лет Октября, 7</li>
+                    </ul>
+
+                    <h2 class="section-title">Мы в соцсетях</h2>
+                    <ul class="social-list">
+                        <li><a href="https://vk.com/wulfi0n" target="_blank" rel="noopener noreferrer">ВКонтакте</a></li>
+                    </ul>
+                </div>
+            </section>
+
+        </main>
 
         <footer class="footer">
             <div class="container">
-                <nav class="footer-nav">
+                <nav class="footer-nav" aria-label="Навигация в подвале">
                     <a href="index.html">Главная</a>
                     <a href="about.html">О сайте</a>
-                    <a href="catalog.html">Каталог</a>
-                    <a href="genres.html">Жанры</a>
-                    <a href="contacts.html">Контакты</a>
                 </nav>
                 <p>© 2026 Music_Portal.</p>
             </div>
