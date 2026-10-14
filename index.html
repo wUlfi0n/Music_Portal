@@ -7,7 +7,7 @@
 
         <title>Music_Portal — каталог музыки, альбомы и жанры</title>
 
-        <link rel="stylesheet" href="css/styles.css">
+        <link rel="stylesheet" href="css/styles.css" id="main-styles">
     </head>
 
     <body>
@@ -26,6 +26,10 @@
                         <li><a href="about.html">О сайте</a></li>
                     </ul>
                 </nav>
+
+                <button type="button" id="print-version" class="btn-print">
+                    Версия для печати
+                </button>
             </div>
         </header>
 
@@ -82,19 +86,35 @@
                 <div class="container">
                     <h2 class="section-title">Каталог</h2>
 
-                    <div class="catalog-filters" role="group" aria-label="Фильтр по жанрам">
-                        <button type="button" class="filter-btn active" data-filter="all">Все</button>
-                        <button type="button" class="filter-btn" data-filter="rock">Рок</button>
-                        <button type="button" class="filter-btn" data-filter="electronic">Электронная</button>
-                        <button type="button" class="filter-btn" data-filter="classical">Классическая</button>
-                        <button type="button" class="filter-btn" data-filter="funk">Фанк</button>
-                        <button type="button" class="filter-btn" data-filter="hip-hop">Хип-хоп</button>
-                        <button type="button" class="filter-btn" data-filter="jazz">Джаз</button>
+                    <div class="catalog-filters">
+                        <label class="filter-group">
+                            <span class="filter-label">Жанр:</span>
+                            <select id="filter-genre">
+                                <option value="all">Все жанры</option>
+                                <option value="rock">Рок</option>
+                                <option value="electronic">Электронная</option>
+                                <option value="classical">Классическая</option>
+                                <option value="funk">Фанк</option>
+                                <option value="hip-hop">Хип-хоп</option>
+                                <option value="jazz">Джаз</option>
+                            </select>
+                        </label>
+
+                        <label class="filter-group">
+                            <span class="filter-label">Рейтинг:</span>
+                            <select id="filter-rating">
+                                <option value="all">Любой</option>
+                                <option value="9">9 и выше</option>
+                                <option value="8">8 и выше</option>
+                                <option value="7">7 и выше</option>
+                                <option value="6">6 и выше</option>
+                            </select>
+                        </label>
                     </div>
 
                     <div class="catalog-grid">
 
-                        <article class="catalog-card" data-genre="rock">
+                        <article class="catalog-card" data-genre="rock" data-rating="9">
                             <img src="images/artist1.jpg" alt="Обложка альбома Midnight Echoes" class="catalog-image" loading="lazy">
                             <div class="catalog-info">
                                 <h3>Lunar Tide</h3>
@@ -104,7 +124,7 @@
                             </div>
                         </article>
 
-                        <article class="catalog-card" data-genre="electronic">
+                        <article class="catalog-card" data-genre="electronic" data-rating="7">
                             <img src="images/artist2.jpg" alt="Обложка альбома First Light" class="catalog-image" loading="lazy">
                             <div class="catalog-info">
                                 <h3>Neo</h3>
@@ -114,7 +134,7 @@
                             </div>
                         </article>
 
-                        <article class="catalog-card" data-genre="classical">
+                        <article class="catalog-card" data-genre="classical" data-rating="8">
                             <img src="images/artist3.jpg" alt="Обложка альбома Piano Stories" class="catalog-image" loading="lazy">
                             <div class="catalog-info">
                                 <h3>Anna Volkova</h3>
@@ -124,7 +144,7 @@
                             </div>
                         </article>
 
-                        <article class="catalog-card" data-genre="funk">
+                        <article class="catalog-card" data-genre="funk" data-rating="6">
                             <img src="images/artist4.jpg" alt="Обложка альбома Funky Nights" class="catalog-image" loading="lazy">
                             <div class="catalog-info">
                                 <h3>The Groove</h3>
@@ -134,7 +154,7 @@
                             </div>
                         </article>
 
-                        <article class="catalog-card" data-genre="hip-hop">
+                        <article class="catalog-card" data-genre="hip-hop" data-rating="8">
                             <img src="images/artist5.jpg" alt="Обложка альбома City Lights" class="catalog-image" loading="lazy">
                             <div class="catalog-info">
                                 <h3>MC Flow</h3>
@@ -144,7 +164,7 @@
                             </div>
                         </article>
 
-                        <article class="catalog-card" data-genre="jazz">
+                        <article class="catalog-card" data-genre="jazz" data-rating="9">
                             <img src="images/artist6.jpg" alt="Обложка альбома Blue Notes" class="catalog-image" loading="lazy">
                             <div class="catalog-info">
                                 <h3>Jazz Quartet</h3>
@@ -206,6 +226,7 @@
                 <nav class="footer-nav" aria-label="Навигация в подвале">
                     <a href="index.html">Главная</a>
                     <a href="about.html">О сайте</a>
+                    <a href="about.html#contacts">Контакты</a>
                 </nav>
                 <p>© 2026 Music_Portal.</p>
             </div>

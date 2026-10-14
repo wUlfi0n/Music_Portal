@@ -1,0 +1,233 @@
+/* ==================== ВЕРСИЯ ДЛЯ ПЕЧАТИ ==================== */
+
+/* --- Скрываем логотип и навигацию, но шапку оставляем --- */
+.logo,
+.nav,
+.footer,
+.catalog-filters,
+.intro-actions,
+.recent {
+    display: none !important;
+}
+
+/* Шапка — минимальная, только кнопка */
+.header {
+    background: transparent;
+    border-bottom: 1px solid #cccccc;
+    box-shadow: none;
+    position: static;
+    padding: 8pt 0;
+    margin-bottom: 15pt;
+}
+
+.header .container {
+    justify-content: flex-end;
+}
+
+/* --- Базовая типографика --- */
+body {
+    font-family: 'Times New Roman', Times, serif;
+    background: #ffffff;
+    color: #000000;
+    line-height: 1.5;
+    font-size: 14pt;
+}
+
+.container {
+    width: 100%;
+    max-width: 100%;
+    padding: 0;
+    margin: 0;
+}
+
+main {
+    padding: 0;
+    max-width: 100%;
+}
+
+/* --- Заголовки --- */
+.section-title {
+    font-size: 18pt;
+    color: #000000;
+    border-bottom: 1.5pt solid #000000;
+    padding-bottom: 6pt;
+    margin-bottom: 15pt;
+    margin-top: 25pt;
+    page-break-after: avoid;
+}
+
+.section-title:first-of-type {
+    margin-top: 0;
+}
+
+/* --- Intro-блок --- */
+.intro {
+    padding: 0 0 20pt;
+    border-bottom: 1pt solid #cccccc;
+    margin-bottom: 20pt;
+}
+
+.intro .container,
+.intro-text {
+    max-width: 100%;
+    margin: 0;
+    text-align: left;
+}
+
+.intro-title {
+    font-size: 24pt;
+    line-height: 1.2;
+    margin-bottom: 8pt;
+    color: #000000;
+    border: none;
+    padding: 0;
+}
+
+.intro-desc {
+    font-size: 12pt;
+    color: #333333;
+    margin-bottom: 0;
+    max-width: 100%;
+}
+
+/* --- Каталог --- */
+.catalog {
+    padding: 0;
+}
+
+.catalog-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 12pt;
+    max-width: 100%;
+    margin: 0;
+}
+
+.catalog-card {
+    background: #ffffff;
+    border: 1pt solid #000000;
+    border-radius: 0;
+    box-shadow: none;
+    padding: 12pt;
+    display: flex;
+    gap: 15pt;
+    align-items: center;
+    page-break-inside: avoid;
+    transition: none;
+}
+
+.catalog-card:hover {
+    transform: none;
+    box-shadow: none;
+}
+
+.catalog-image {
+    width: 100pt;
+    height: 100pt;
+    object-fit: cover;
+    border-radius: 0;
+    flex-shrink: 0;
+    filter: grayscale(100%);
+    border: 0.5pt solid #999999;
+}
+
+.catalog-info {
+    min-width: 0;
+    flex: 1;
+}
+
+.catalog-card h3 {
+    font-size: 16pt;
+    margin-bottom: 4pt;
+    color: #000000;
+    line-height: 1.2;
+}
+
+.catalog-album {
+    font-size: 12pt;
+    color: #333333;
+    font-style: italic;
+    margin-bottom: 6pt;
+}
+
+.catalog-genre {
+    font-size: 10pt;
+    color: #000000;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.5pt;
+    margin-bottom: 8pt;
+}
+
+.catalog-genre a {
+    color: #000000;
+    text-decoration: none;
+}
+
+.catalog-desc {
+    font-size: 11pt;
+    color: #333333;
+    line-height: 1.4;
+}
+
+/* --- Плитки жанров --- */
+.genres {
+    padding: 0;
+    margin-top: 25pt;
+}
+
+.genres-tiles {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10pt;
+}
+
+.genre-tile {
+    background: #ffffff;
+    border: 1pt solid #000000;
+    border-radius: 0;
+    padding: 12pt;
+    text-align: left;
+    page-break-inside: avoid;
+}
+
+.genre-tile h3 {
+    font-size: 13pt;
+    margin-bottom: 4pt;
+    color: #000000;
+}
+
+.genre-tile p {
+    font-size: 11pt;
+    color: #333333;
+}
+
+/* --- Ссылки --- */
+a {
+    color: #000000;
+    text-decoration: underline;
+}
+
+/* --- Убираем все тени и скругления --- */
+* {
+    box-shadow: none !important;
+    text-shadow: none !important;
+}
+
+/* --- Разрывы страниц --- */
+.catalog-card,
+.genre-tile {
+    page-break-inside: avoid;
+}
+
+.section-title {
+    page-break-after: avoid;
+}
+
+/* ==================== ПРИ РЕАЛЬНОЙ ПЕЧАТИ (Ctrl+P) ==================== */
+@media print {
+    .btn-print {
+        display: none !important;
+    }
+}

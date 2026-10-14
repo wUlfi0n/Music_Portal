@@ -2,44 +2,134 @@
 (function () {
     'use strict';
 
-    const filterButtons = document.querySelectorAll('.filter-btn');
+    const genreSelect = document.getElementById('filter-genre');
+    const ratingSelect = document.getElementById('filter-rating');
     const cards = document.querySelectorAll('.catalog-card');
 
-    // Если на странице нет фильтра или карточек — выходим
-    if (!filterButtons.length || !cards.length) return;
+    // Если на странице нет фильтров или карточек — выходим
+    if (!genreSelect || !ratingSelect || !cards.length) return;
 
     /**
-     * Фильтрует карточки по жанру.
-     * @param {string} filter — значение data-filter ("all", "rock", ...)
+     * Применяет текущие фильтры к карточкам.
+     * Возвращает массив карточек, которые прошли фильтр.
      */
-    function filterCards(filter) {
+    function applyFilters() {
+        const genre = genreSelect.value;
+        const rating = ratingSelect.value;
+
+        const visibleCards = [];
+
         cards.forEach(function (card) {
-            const genre = card.dataset.genre;
-            const shouldShow = filter === 'all' || genre === filter;
+            const cardGenre = card.dataset.genre;
+            const cardRating = parseInt(card.dataset.rating, 10);
+
+            const genreMatch = genre === 'all' || cardGenre === genre;
+            const ratingMatch = rating === 'all' || cardRating >= parseInt(rating, 10);
+
+            const shouldShow = genreMatch && ratingMatch;
             card.classList.toggle('is-hidden', !shouldShow);
+
+            if (shouldShow) visibleCards.push(card);
+        });
+
+        return visibleCards;
+    }
+
+    /**
+     * «Умный фильтр»: делает недоступными значения,
+     * которые приведут к пустому результату.
+     */
+    function updateSmartFilter() {
+        const currentGenre = genreSelect.value;
+        const currentRating = ratingSelect.value;
+
+        // === Жанры ===
+        // Проверяем: если выбрать жанр X (при текущем рейтинге) — будут ли результаты?
+        Array.from(genreSelect.options).forEach(function (option) {
+            if (option.value === 'all') return;
+
+            const matches = Array.from(cards).some(function (card) {
+                const cardGenre = card.dataset.genre;
+                const cardRating = parseInt(card.dataset.rating, 10);
+                const ratingOk = currentRating === 'all' || cardRating >= parseInt(currentRating, 10);
+                return cardGenre === option.value && ratingOk;
+            });
+
+            // Отключаем опцию, если она не даёт результатов.
+            // Но если она уже выбрана — оставляем доступной.
+            option.disabled = !matches && option.value !== currentGenre;
+        });
+
+        // === Рейтинги ===
+        // Проверяем: если выбрать рейтинг Y (при текущем жанре) — будут ли результаты?
+        Array.from(ratingSelect.options).forEach(function (option) {
+            if (option.value === 'all') return;
+
+            const matches = Array.from(cards).some(function (card) {
+                const cardGenre = card.dataset.genre;
+                const cardRating = parseInt(card.dataset.rating, 10);
+                const genreOk = currentGenre === 'all' || cardGenre === currentGenre;
+                return genreOk && cardRating >= parseInt(option.value, 10);
+            });
+
+            option.disabled = !matches && option.value !== currentRating;
         });
     }
 
     /**
-     * Переключает активную кнопку.
-     * @param {HTMLElement} activeBtn — кнопка, которую надо сделать активной
+     * Полный цикл: применить фильтр + обновить умный фильтр.
      */
-    function setActiveButton(activeBtn) {
-        filterButtons.forEach(function (btn) {
-            const isActive = btn === activeBtn;
-            btn.classList.toggle('active', isActive);
-            btn.setAttribute('aria-pressed', String(isActive));
-        });
+    function update() {
+        applyFilters();
+        updateSmartFilter();
     }
 
-    // Навешиваем обработчики
-    filterButtons.forEach(function (btn) {
-        btn.setAttribute('aria-pressed', btn.classList.contains('active') ? 'true' : 'false');
+    // Слушаем изменения обоих select
+    genreSelect.addEventListener('change', update);
+    ratingSelect.addEventListener('change', update);
 
-        btn.addEventListener('click', function () {
-            const filter = btn.dataset.filter;
-            filterCards(filter);
-            setActiveButton(btn);
-        });
+    // Инициализация при загрузке
+    update();
+})();
+
+/* ==================== ВЕРСИЯ ДЛЯ ПЕЧАТИ ==================== */
+(function () {
+    'use strict';
+
+    const printBtn = document.getElementById('print-version');
+    const mainStyles = document.getElementById('main-styles');
+
+    if (!printBtn || !mainStyles) return;
+
+    let isPrintMode = false;
+    let printStylesLink = null;
+
+    printBtn.addEventListener('click', function () {
+        isPrintMode = !isPrintMode;
+
+        if (isPrintMode) {
+            // Подключаем print.css
+            printStylesLink = document.createElement('link');
+            printStylesLink.rel = 'stylesheet';
+            printStylesLink.href = 'css/print.css';
+            printStylesLink.id = 'print-styles';
+            document.head.appendChild(printStylesLink);
+
+            // Отключаем основной CSS
+            mainStyles.disabled = true;
+
+            printBtn.textContent = 'Обычная версия';
+        } else {
+            // Удаляем print.css
+            if (printStylesLink) {
+                printStylesLink.remove();
+                printStylesLink = null;
+            }
+
+            // Включаем основной CSS
+            mainStyles.disabled = false;
+
+            printBtn.textContent = 'Версия для печати';
+        }
     });
 })();

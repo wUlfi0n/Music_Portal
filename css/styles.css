@@ -24,6 +24,7 @@
 /* ==================== БАЗА ==================== */
 html {
     scroll-behavior: smooth;
+    color-scheme: light;
 }
 
 body {
@@ -50,7 +51,8 @@ body {
 /* ==================== ДОСТУПНОСТЬ ==================== */
 a:focus-visible,
 button:focus-visible,
-input:focus-visible {
+input:focus-visible,
+select:focus-visible {
     outline: 2px solid var(--accent);
     outline-offset: 2px;
 }
@@ -138,6 +140,29 @@ input:focus-visible {
     font-weight: 700;
 }
 
+/* ==================== КНОПКА "ВЕРСИЯ ДЛЯ ПЕЧАТИ" ==================== */
+.btn-print {
+    background: transparent;
+    color: var(--text);
+    border: 1px solid var(--border);
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-family: inherit;
+    cursor: pointer;
+    transition: border-color 0.3s, color 0.3s;
+}
+
+.btn-print:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+}
+
+.btn-print:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+}
+
 /* ==================== INTRO (главная) ==================== */
 .intro {
     padding: 40px 0;
@@ -220,37 +245,60 @@ input:focus-visible {
 .catalog-filters {
     display: flex;
     flex-wrap: wrap;
-    gap: 10px;
+    gap: 20px;
     margin-bottom: 30px;
+    align-items: center;
 }
 
-.filter-btn {
+.filter-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 15px;
+    color: var(--text);
+}
+
+.filter-label {
+    font-weight: 500;
+}
+
+.catalog-filters select {
+    padding: 10px 36px 10px 14px;
+    font-size: 14px;
+    font-family: inherit;
+    border: 1px solid var(--border);
+    border-radius: 10px;
     background: var(--bg-block);
     color: var(--text);
-    border: 1px solid var(--border);
-    padding: 10px 20px;
-    border-radius: 30px;
-    font-size: 14px;
-    font-weight: 500;
     cursor: pointer;
-    transition: background-color 0.3s, color 0.3s, border-color 0.3s;
-    font-family: inherit;
+    transition: border-color 0.3s;
+    appearance: none;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3e%3cpath fill='%23666' d='M6 8L2 4h8z'/%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    color-scheme: light;
+    forced-color-adjust: none;
 }
 
-.filter-btn:hover {
-    border-color: var(--accent);
-    color: var(--accent);
-}
-
-.filter-btn.active {
-    background: var(--accent);
-    color: #ffffff;
+.catalog-filters select:hover {
     border-color: var(--accent);
 }
 
-.filter-btn:focus-visible {
+.catalog-filters select:focus-visible {
     outline: 2px solid var(--accent);
     outline-offset: 2px;
+}
+
+.catalog-filters select:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.catalog-filters option {
+    background-color: #ffffff;
+    color: #1a1a1a;
+    color-scheme: light;
+    forced-color-adjust: none;
 }
 
 .catalog-grid {
@@ -632,6 +680,135 @@ input:focus-visible {
 
 /* ==================== АДАПТИВНОСТЬ ==================== */
 
+/* Горизонтальная ориентация на телефонах/планшетах (до 900px) */
+@media (max-width: 900px) and (orientation: landscape) {
+    .header {
+        padding: 8px 0;
+    }
+
+    .header .container {
+        flex-wrap: nowrap;
+        gap: 10px;
+    }
+
+    .logo {
+        font-size: 16px;
+    }
+
+    .logo-img {
+        width: 28px;
+        height: 28px;
+    }
+
+    .nav-list {
+        gap: 10px;
+    }
+
+    .nav-list a {
+        font-size: 13px;
+    }
+
+    .btn-print {
+        padding: 6px 12px;
+        font-size: 12px;
+    }
+
+    .intro,
+    .catalog,
+    .genres,
+    .recent,
+    .contacts,
+    .stats,
+    .mission,
+    .page-intro {
+        padding: 20px 0;
+    }
+
+    .section-title {
+        font-size: 20px;
+        margin-bottom: 20px;
+    }
+
+    .intro-title,
+    .page-intro h1 {
+        font-size: 24px;
+        margin-bottom: 10px;
+    }
+
+    .intro-desc,
+    .page-intro p {
+        font-size: 14px;
+        margin-bottom: 15px;
+    }
+
+    .btn {
+        padding: 10px 20px;
+        font-size: 13px;
+    }
+
+    .catalog-image {
+        width: 100px;
+        height: 100px;
+    }
+
+    .catalog-card {
+        padding: 15px;
+        gap: 15px;
+    }
+
+    .catalog-card h3 {
+        font-size: 17px;
+    }
+
+    .catalog-album {
+        font-size: 12px;
+    }
+
+    .catalog-desc {
+        font-size: 12px;
+    }
+
+    /* Recent — 3 в ряд */
+    .recent-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 10px;
+    }
+
+    .recent-card img {
+        height: 100px;
+    }
+
+    .recent-link {
+        padding: 10px;
+    }
+
+    .recent-card h3 {
+        font-size: 13px;
+        margin-bottom: 4px;
+    }
+
+    .recent-card p {
+        font-size: 11px;
+    }
+
+    .genres-tiles {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 10px;
+    }
+
+    .genre-tile {
+        padding: 15px 10px;
+    }
+
+    .genre-tile h3 {
+        font-size: 14px;
+    }
+
+    .genre-tile p {
+        font-size: 11px;
+    }
+}
+
 /* Телефон (до 500px) */
 @media (max-width: 500px) {
     .container {
@@ -655,17 +832,19 @@ input:focus-visible {
         padding: 15px 0;
     }
 
-    /* Шапка */
+    /* Шапка (вариант D) */
     .header {
         padding: 10px 0;
     }
 
     .header .container {
+        display: flex;
         flex-direction: column;
         gap: 8px;
     }
 
     .logo {
+        justify-content: center;
         font-size: 17px;
     }
 
@@ -680,6 +859,12 @@ input:focus-visible {
     }
 
     .nav-list a {
+        font-size: 12px;
+    }
+
+    .btn-print {
+        align-self: flex-end;
+        padding: 6px 12px;
         font-size: 12px;
     }
 
@@ -705,18 +890,28 @@ input:focus-visible {
         font-size: 13px;
     }
 
-    /* Фильтр — перенос на новую строку */
+    /* Фильтры */
     .catalog-filters {
-        flex-wrap: wrap;
-        gap: 6px;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        gap: 8px;
         margin-bottom: 15px;
     }
 
-    .filter-btn {
-        padding: 6px 12px;
-        font-size: 11px;
+    .filter-group {
+        flex: 1;
+        min-width: 0;
+        gap: 4px;
+        font-size: 12px;
     }
 
+    .catalog-filters select {
+        flex: 1;
+        min-width: 0;
+        padding: 8px 28px 8px 10px;
+        font-size: 12px;
+        background-position: right 8px center;
+    }
     /* Каталог */
     .catalog-grid {
         max-width: 100%;
@@ -755,7 +950,7 @@ input:focus-visible {
         line-height: 1.3;
     }
 
-    /* Жанры — плитки в 2 колонки */
+    /* Жанры */
     .genres-tiles {
         grid-template-columns: repeat(2, 1fr);
         gap: 8px;
@@ -773,7 +968,7 @@ input:focus-visible {
         font-size: 10px;
     }
 
-    /* Недавно добавлено */
+    /* Recent */
     .recent-grid {
         grid-template-columns: 1fr;
         gap: 8px;
@@ -855,5 +1050,75 @@ input:focus-visible {
 
     .footer p {
         font-size: 10px;
+    }
+}
+
+/* ==================== ПЕЧАТЬ (Ctrl+P) ==================== */
+@media print {
+    /* Скрываем всё лишнее */
+    .header,
+    .footer,
+    .catalog-filters,
+    .intro-actions,
+    .recent,
+    .btn-print {
+        display: none !important;
+    }
+
+    /* Базовые цвета и шрифт */
+    body {
+        font-family: 'Times New Roman', Times, serif;
+        background: #ffffff;
+        color: #000000;
+    }
+
+    /* Заголовки — с подчёркиванием */
+    .section-title {
+        color: #000000;
+        border-bottom: 1.5pt solid #000000;
+        padding-bottom: 6pt;
+        margin-bottom: 15pt;
+        page-break-after: avoid;
+    }
+
+    /* Карточки каталога — рамки */
+    .catalog-card {
+        border: 1pt solid #000000;
+        border-radius: 0;
+        box-shadow: none;
+        page-break-inside: avoid;
+        padding: 12pt;
+    }
+
+    .catalog-image {
+        filter: grayscale(100%);
+        border-radius: 0;
+    }
+
+    .catalog-genre {
+        color: #000000;
+    }
+
+    .catalog-genre a {
+        color: #000000;
+        text-decoration: none;
+    }
+
+    .catalog-album,
+    .catalog-desc {
+        color: #333333;
+    }
+
+    /* Плитки жанров — рамки */
+    .genre-tile {
+        border: 1pt solid #000000;
+        border-radius: 0;
+        page-break-inside: avoid;
+    }
+
+    /* Убираем тени и скругления */
+    * {
+        box-shadow: none !important;
+        text-shadow: none !important;
     }
 }
